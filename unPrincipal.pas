@@ -4,23 +4,27 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, MCEdit, MCButton, MCEstatistica, DB, Grids, DBGrids;
+  Dialogs, StdCtrls, MCEdit, MCButton, MCMemo, MCEstatistica, DB, Grids, DBGrids;
 
 type
 
   TfmPrincipal = class(TForm)
-    Edit1: TEdit;
-    Edit2: TEdit;
     DBGrid1: TDBGrid;
     DataSource1: TDataSource;
+    Label5: TLabel;
+    GroupBox1: TGroupBox;
     Label1: TLabel;
-    Label2: TLabel;
+    Edit1: TEdit;
     Label3: TLabel;
     Edit3: TEdit;
+    Label2: TLabel;
+    Edit2: TEdit;
     Label4: TLabel;
     Edit4: TEdit;
+    Label6: TLabel;
+    Memo1: TMemo;
     Button1: TButton;
-    Label5: TLabel;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,5 +40,10 @@ implementation
 
 { TEdit }
 
+
+procedure TfmPrincipal.Button1Click(Sender: TObject);
+begin
+  ShowMessage('Produto cadastrado com sucesso!');
+end;
 
 end.

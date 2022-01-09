@@ -1,4 +1,4 @@
-unit MCEdit;
+unit MCMemo;
 
 interface
 
@@ -6,7 +6,7 @@ uses
   StdCtrls, MCEstatistica;
 
 type
-  TEdit = class(StdCtrls.TEdit)
+  TMemo = class(StdCtrls.TMemo)
   protected
     procedure DoEnter; override;
   public
@@ -16,7 +16,7 @@ implementation
 
 { TEdit }
 
-procedure TEdit.DoEnter;
+procedure TMemo.DoEnter;
 begin
   inherited;
   MCEstatisticaVar.Inserir(Self.Name);

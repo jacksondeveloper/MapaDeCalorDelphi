@@ -3,7 +3,7 @@ unit MCButton;
 interface
 
 uses
-  StdCtrls, Dialogs, MCEstatistica;
+  StdCtrls, MCEstatistica;
 
 type
   TButton = class(StdCtrls.TButton)

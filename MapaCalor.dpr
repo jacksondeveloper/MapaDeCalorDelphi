@@ -5,7 +5,8 @@ uses
   unPrincipal in 'unPrincipal.pas' {fmPrincipal},
   MCEdit in 'MCEdit.pas',
   MCEstatistica in 'MCEstatistica.pas',
-  MCButton in 'MCButton.pas';
+  MCButton in 'MCButton.pas',
+  MCMemo in 'MCMemo.pas';
 
 {$R *.res}
 
