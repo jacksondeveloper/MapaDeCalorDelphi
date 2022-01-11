@@ -9,10 +9,13 @@ type
   TMCEstatistica = class
   private
     FTabela: TClientDataSet;
+    procedure SetTabela(const Value: TClientDataSet);
+    function GetTabela: TClientDataSet;
   public
     constructor Create;
     destructor Destroy; override;
     procedure Inserir(Nome: String);
+    property Tabela: TClientDataSet read GetTabela write SetTabela;
   end;
 
 var
@@ -55,6 +58,11 @@ begin
   inherited;
 end;
 
+function TMCEstatistica.GetTabela: TClientDataSet;
+begin
+  Result := FTabela;
+end;
+
 procedure TMCEstatistica.Inserir(Nome: String);
 var
   Click: Integer;
@@ -86,6 +94,11 @@ begin
 
   // Para testar e ver visualmente
   fmPrincipal.DataSource1.DataSet := FTabela;
+end;
+
+procedure TMCEstatistica.SetTabela(const Value: TClientDataSet);
+begin
+  FTabela := Value;
 end;
 
 initialization

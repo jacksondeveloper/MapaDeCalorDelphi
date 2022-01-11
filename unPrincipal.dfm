@@ -1,6 +1,6 @@
 object fmPrincipal: TfmPrincipal
-  Left = 288
-  Top = 214
+  Left = 308
+  Top = 226
   Width = 853
   Height = 387
   Caption = 'fmPrincipal'
@@ -28,9 +28,9 @@ object fmPrincipal: TfmPrincipal
   end
   object DBGrid1: TDBGrid
     Left = 320
-    Top = 38
+    Top = 35
     Width = 505
-    Height = 299
+    Height = 270
     DataSource = DataSource1
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -123,7 +123,7 @@ object fmPrincipal: TfmPrincipal
       Font.Style = []
       ParentFont = False
     end
-    object Edit1: TEdit
+    object edNome: TEdit
       Left = 16
       Top = 67
       Width = 121
@@ -137,7 +137,7 @@ object fmPrincipal: TfmPrincipal
       TabOrder = 0
       Text = 'Arroz'
     end
-    object Edit3: TEdit
+    object edGondola: TEdit
       Left = 152
       Top = 68
       Width = 121
@@ -151,7 +151,7 @@ object fmPrincipal: TfmPrincipal
       TabOrder = 1
       Text = '1234'
     end
-    object Edit2: TEdit
+    object edPreco: TEdit
       Left = 16
       Top = 124
       Width = 121
@@ -165,7 +165,7 @@ object fmPrincipal: TfmPrincipal
       TabOrder = 2
       Text = '10,99'
     end
-    object Edit4: TEdit
+    object edCST: TEdit
       Left = 153
       Top = 124
       Width = 121
@@ -179,7 +179,7 @@ object fmPrincipal: TfmPrincipal
       TabOrder = 3
       Text = '00'
     end
-    object Memo1: TMemo
+    object mmObeservacao: TMemo
       Left = 16
       Top = 183
       Width = 258
@@ -194,24 +194,39 @@ object fmPrincipal: TfmPrincipal
       ParentFont = False
       TabOrder = 4
     end
-    object Button1: TButton
+    object btCadastrar: TButton
       Left = 94
       Top = 282
       Width = 99
       Height = 32
       Caption = 'Cadastrar'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
       TabOrder = 5
-      OnClick = Button1Click
+      OnClick = btCadastrarClick
     end
   end
+  object btPintar: TButton
+    Left = 712
+    Top = 313
+    Width = 112
+    Height = 31
+    Caption = 'Pintar '#225'reas'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    OnClick = btPintarClick
+  end
   object DataSource1: TDataSource
-    Left = 264
+    Left = 240
     Top = 288
   end
 end
