@@ -207,7 +207,6 @@ object fmPrincipal: TfmPrincipal
       Font.Style = []
       ParentFont = False
       TabOrder = 5
-      OnClick = btCadastrarClick
     end
   end
   object btPintar: TButton

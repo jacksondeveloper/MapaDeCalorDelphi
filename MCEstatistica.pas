@@ -3,7 +3,7 @@ unit MCEstatistica;
 interface
 
 uses
-  DB, DBClient, SysUtils, Forms;
+  DB, DBClient, SysUtils, Forms, Graphics, Classes, TypInfo, StdCtrls;
 
 type
   TMCEstatistica = class
@@ -15,6 +15,7 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure Inserir(Nome: String);
+    procedure PintarComponentes(TelaAtiva: TForm);
     property Tabela: TClientDataSet read GetTabela write SetTabela;
   end;
 
@@ -24,7 +25,7 @@ var
 implementation
 
 uses
-  unPrincipal, Classes;
+  unPrincipal;
 
 { TMCEstatistica }
 
@@ -94,6 +95,67 @@ begin
 
   // Para testar e ver visualmente
   fmPrincipal.DataSource1.DataSet := FTabela;
+
+  // Se quiser pintar em tempo real
+  // PintarComponentes(Screen.ActiveForm);
+end;
+
+procedure TMCEstatistica.PintarComponentes(TelaAtiva: TForm);
+var
+  Componente: TComponent;
+  MaisCliques: Integer;
+
+  function BuscaCor(subMaisCliques, subClick: Integer): TColor;
+  var
+    Grupo1, Grupo2: Integer;
+  begin
+    Grupo1 := subMaisCliques div 3;
+    Grupo2 := Grupo1 * 2;
+
+    if subClick <= Grupo1 then
+      result := $00c4c4f2
+    else if subClick <= Grupo2 then
+      result := $006d6df7
+    else
+      result := $000303fc;
+  end;
+begin
+  begin
+    MCEstatisticaVar.Tabela.First;
+    MaisCliques := 0;
+
+    while not MCEstatisticaVar.Tabela.Eof do
+    begin
+      if MCEstatisticaVar.Tabela.FieldByName('CLICK').asInteger > MaisCliques then
+        MaisCliques := MCEstatisticaVar.Tabela.FieldByName('CLICK').asInteger;
+      MCEstatisticaVar.Tabela.Next;
+    end;
+
+    MCEstatisticaVar.Tabela.First;
+
+    while not MCEstatisticaVar.Tabela.Eof do
+    begin
+      Componente := nil;
+      Componente := TelaAtiva.FindComponent(MCEstatisticaVar.Tabela.FieldByName('NOME').asString);
+      if Componente <> nil then
+      begin
+        if GetPropInfo(Componente, 'Color') <> nil then
+        begin
+          if Componente is TEdit then
+            (Componente as TEdit).Color := BuscaCor(MaisCliques, MCEstatisticaVar.Tabela.FieldByName('CLICK').asInteger)
+          else if Componente is TMemo then
+            (Componente as TMemo).Color := BuscaCor(MaisCliques, MCEstatisticaVar.Tabela.FieldByName('CLICK').asInteger);
+        end
+        else if GetPropInfo(Componente, 'Font') <> nil then
+        begin
+          if Componente is TButton then
+            (Componente as TButton).Font.Style := [fsBold];
+        end;
+      end;
+      MCEstatisticaVar.Tabela.Next;
+    end;
+
+  end;
 end;
 
 procedure TMCEstatistica.SetTabela(const Value: TClientDataSet);
