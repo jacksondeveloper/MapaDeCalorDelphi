@@ -2,11 +2,11 @@ program MapaCalor;
 
 uses
   Forms,
-  unPrincipal in 'unPrincipal.pas' {fmPrincipal},
-  MCEdit in 'MCEdit.pas',
-  MCEstatistica in 'MCEstatistica.pas',
-  MCButton in 'MCButton.pas',
-  MCMemo in 'MCMemo.pas';
+  unPrincipal in 'src\unPrincipal.pas' {fmPrincipal},
+  MCButton in 'src\mapadecalor\MCButton.pas',
+  MCEdit in 'src\mapadecalor\MCEdit.pas',
+  MCEstatistica in 'src\mapadecalor\MCEstatistica.pas',
+  MCMemo in 'src\mapadecalor\MCMemo.pas';
 
 {$R *.res}
 
