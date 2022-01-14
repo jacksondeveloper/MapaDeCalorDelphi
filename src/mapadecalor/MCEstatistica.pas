@@ -109,6 +109,10 @@ var
   var
     Grupo1, Grupo2: Integer;
   begin
+
+    { Divide a quantidade de clique em 3 grupos para pintar do mais
+    claro ao mais escuro de acordo com quantidade de clique}
+
     Grupo1 := subMaisCliques div 3;
     Grupo2 := Grupo1 * 2;
 
@@ -121,9 +125,15 @@ var
   end;
 begin
   begin
+    // Filtra resultados somente da tela solicitada por parâmetro
+    MCEstatisticaVar.FTabela.Filtered := False;
+    MCEstatisticaVar.FTabela.Filter := 'TELA = ' + QuotedStr(TelaAtiva.Name);
+    MCEstatisticaVar.FTabela.Filtered := True;
+
     MCEstatisticaVar.Tabela.First;
     MaisCliques := 0;
 
+    // Busca quantidade maxima de cliques para fazer separação dos grupo que serão pintados
     while not MCEstatisticaVar.Tabela.Eof do
     begin
       if MCEstatisticaVar.Tabela.FieldByName('CLICK').asInteger > MaisCliques then
@@ -135,10 +145,11 @@ begin
 
     while not MCEstatisticaVar.Tabela.Eof do
     begin
-      Componente := nil;
       Componente := TelaAtiva.FindComponent(MCEstatisticaVar.Tabela.FieldByName('NOME').asString);
       if Componente <> nil then
       begin
+
+        // Pinta componente na tela caso tenha propriedade color
         if GetPropInfo(Componente, 'Color') <> nil then
         begin
           if Componente is TEdit then
@@ -146,15 +157,17 @@ begin
           else if Componente is TMemo then
             (Componente as TMemo).Color := BuscaCor(MaisCliques, MCEstatisticaVar.Tabela.FieldByName('CLICK').asInteger);
         end
-        else if GetPropInfo(Componente, 'Font') <> nil then
+        else if GetPropInfo(Componente, 'Font') <> nil then // se não tem color então aumenta a fonte
         begin
           if Componente is TButton then
             (Componente as TButton).Font.Style := [fsBold];
         end;
+
       end;
       MCEstatisticaVar.Tabela.Next;
     end;
 
+    MCEstatisticaVar.FTabela.Filtered := False;
   end;
 end;
 
